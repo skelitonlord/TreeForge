@@ -18,6 +18,9 @@ There will be a setup script released that will also double as the “updater”
 
 Treeforge in this state will not make bootable trees yet, as it’s still only about 40% done through the reconstruction. it will however populate device.mk and boardconfig.mk with what it can find if successful
 
+edit: it will also populate various other partitions as the framework is built but I haven’t added the functionality or it just copy pastes a bunch of PRODUCT_COPY_FILES into treeforge_device.mk. This is currently on purpose to prove things don’t break as well as things Treeforge finds without knowing what to do with it. As well as a full test suite (currently at 4400+ total tests) to test every function of treeforge in case source needs to be edited. The point of this is to easily track back issues seeing as this entire tool is based off of “this one is the better
+option”. if these tests don’t pass, (they will probably have to be updated, but that’s on you) you will be required to figure out why, and I can provide help as needed, and can be discussed in issues. If you hack around them, future contributions will be disallowed from that contributor. A bunch of refactoring is still to be done to allow shared classes and functions instead of 2000 lines of individual modules.
+
 super.img is currently not fully
 implemented as I realized half way through that pixel tablet doesn’t use it and if I don’t need it right now, it’s waiting.
 
