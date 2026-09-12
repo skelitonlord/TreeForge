@@ -1,0 +1,9 @@
+[workspace]
+root = "./workspace"
+
+[logging]
+level = "DEBUG"
+verbose = false
+
+[android]
+target_version = 17

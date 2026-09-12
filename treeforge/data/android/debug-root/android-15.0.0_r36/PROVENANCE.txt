@@ -1,0 +1,66 @@
+TreeForge Android Debug-Root Provider Payload
+
+AOSP provider release:
+  android-15.0.0_r37
+
+Artifacts:
+
+  adb_debug.prop
+    AOSP project:
+      platform/system/core
+    Source:
+      system/core/rootdir/adb_debug.prop
+    Soong module:
+      adb_debug.prop
+    Runtime purpose:
+      Android canonical debug-ramdisk property payload.
+
+  userdebug_plat_sepolicy.cil
+    AOSP project:
+      platform/system/sepolicy
+    Soong module:
+      userdebug_plat_sepolicy.cil
+    Provider configuration:
+      TARGET_PRODUCT=aosp_tangorpro
+      TARGET_RELEASE=trunk_staging
+      TARGET_BUILD_VARIANT=userdebug
+      --soong-only
+    Runtime purpose:
+      Android canonical userdebug platform SELinux policy for the
+      force-debuggable/debug-ramdisk path.
+
+TreeForge acceptance:
+
+  adb_debug.prop must contain:
+    ro.adb.secure=0
+    ro.debuggable=1
+    ro.force.debuggable=1
+
+  userdebug_plat_sepolicy.cil was validated by compiling it with the
+  exact canonical factory split-policy population derived by TreeForge:
+
+    platform mapping
+    system_ext policy and mapping
+    product policy and mapping
+    plat_pub_versioned.cil
+    vendor_sepolicy.cil
+    odm_sepolicy.cil
+
+  Factory vendor mapping version:
+    202404
+
+  SELinux policy version:
+    30
+
+Licensing:
+
+  adb_debug.prop:
+    Android-Apache-2.0 / Apache License 2.0
+
+  userdebug_plat_sepolicy.cil:
+    Generated from platform/system/sepolicy.
+    Preserve the applicable system/sepolicy NOTICE alongside redistribution.
+
+These files are bundled so normal TreeForge Bootstrap and Boot Image runs
+do not require invoking the AOSP build system merely to obtain the canonical
+Android debug-root payload.

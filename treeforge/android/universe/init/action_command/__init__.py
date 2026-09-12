@@ -1,0 +1,58 @@
+from treeforge.android.universe.init.action_command.interpreter import (
+    AndroidUniverseInitActionCommandInterpreter,
+)
+from treeforge.android.universe.init.action_command.model import (
+    AndroidUniverseInitActionCommandRequirement,
+)
+from treeforge.android.universe.init.action_command.semantics import (
+    AndroidUniverseInitActionCommandChmodSemantics,
+    AndroidUniverseInitActionCommandClassRestartSemantics,
+    AndroidUniverseInitActionCommandChownSemantics,
+    AndroidUniverseInitActionCommandExecSemantics,
+    AndroidUniverseInitActionCommandFstabSemantics,
+    AndroidUniverseInitActionCommandKeyValueSemantics,
+    AndroidUniverseInitActionCommandMkdirSemantics,
+    AndroidUniverseInitActionCommandMountSemantics,
+    AndroidUniverseInitActionCommandNoArgumentSemantics,
+    AndroidUniverseInitActionCommandPerformApexConfigSemantics,
+    AndroidUniverseInitActionCommandPathSemantics,
+    AndroidUniverseInitActionCommandPathsSemantics,
+    AndroidUniverseInitActionCommandSetrlimitSemantics,
+    AndroidUniverseInitActionCommandRestoreconSemantics,
+    AndroidUniverseInitActionCommandRestartSemantics,
+    AndroidUniverseInitActionCommandInstallkeySemantics,
+    AndroidUniverseInitActionCommandScalarSemantics,
+    AndroidUniverseInitActionCommandSemantics,
+    AndroidUniverseInitActionCommandSourceDestinationSemantics,
+    AndroidUniverseInitActionCommandTargetSemantics,
+    AndroidUniverseInitActionCommandWaitSemantics,
+    AndroidUniverseInitActionCommandWriteSemantics,
+)
+
+
+__all__ = (
+    "AndroidUniverseInitActionCommandInterpreter",
+    "AndroidUniverseInitActionCommandRequirement",
+    "AndroidUniverseInitActionCommandSemantics",
+    "AndroidUniverseInitActionCommandTargetSemantics",
+    "AndroidUniverseInitActionCommandScalarSemantics",
+    "AndroidUniverseInitActionCommandPathSemantics",
+    "AndroidUniverseInitActionCommandWaitSemantics",
+    "AndroidUniverseInitActionCommandPathsSemantics",
+    "AndroidUniverseInitActionCommandSetrlimitSemantics",
+    "AndroidUniverseInitActionCommandRestoreconSemantics",
+    "AndroidUniverseInitActionCommandRestartSemantics",
+    "AndroidUniverseInitActionCommandInstallkeySemantics",
+    "AndroidUniverseInitActionCommandKeyValueSemantics",
+    "AndroidUniverseInitActionCommandSourceDestinationSemantics",
+    "AndroidUniverseInitActionCommandChmodSemantics",
+    "AndroidUniverseInitActionCommandClassRestartSemantics",
+    "AndroidUniverseInitActionCommandChownSemantics",
+    "AndroidUniverseInitActionCommandMkdirSemantics",
+    "AndroidUniverseInitActionCommandMountSemantics",
+    "AndroidUniverseInitActionCommandNoArgumentSemantics",
+    "AndroidUniverseInitActionCommandPerformApexConfigSemantics",
+    "AndroidUniverseInitActionCommandExecSemantics",
+    "AndroidUniverseInitActionCommandFstabSemantics",
+    "AndroidUniverseInitActionCommandWriteSemantics",
+)

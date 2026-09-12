@@ -1,0 +1,174 @@
+# Python
+
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+/tangorpro/
+
+# Type checker / linter caches
+.mypy_cache/
+.pyright/
+.ruff_cache/
+
+# Python packaging output
+/build/
+/dist/
+*.egg-info/
+.eggs/
+
+
+# TreeForge development artifacts
+
+# Smoke-test workspaces and audit output
+.smoke/
+.smoke-tmp/
+
+# Generated TreeForge output
+/generated/
+/generated-*/
+/output/
+/output2/
+/outputs/
+/output-felix/
+/outputbak/
+
+# Logs
+/logs/
+*.log
+
+# Temporary workspaces
+/workspace/
+/workspaces/
+/tmp/
+
+
+# Android factory images / proprietary artifacts
+
+# AOSP SYNC
+# This goes into aosp/androidversion/ so you can use your own git within it
+/aosp/
+.treeforge-reference/
+
+# Real factory-image fixtures
+tests/fixtures/factory/*
+!tests/fixtures/factory/.gitkeep
+
+# Factory-image / OTA archives
+*-factory-*.zip
+*-ota-*.zip
+
+# Android partition / boot images
+*.img
+
+# Intentional repository boot test fixtures
+!tests/fixtures/boot/boot.img
+!tests/fixtures/boot/vendor_boot.img
+
+# OTA / dynamic-partition payloads
+payload.bin
+
+# Extracted Android filesystem trees
+/extracted/
+/extracted-*/
+
+
+# Temporary TreeForge migration tooling
+
+/tools/
+
+
+# Editors
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+
+# Operating system metadata
+
+.DS_Store
+Thumbs.db
+/.treeforge-private/
+/.treeforge-reference/
+
+#random extras
+
+/stockaosp15/
+
+# ----------------------------------------------------------------------
+# TreeForge local environments / caches
+# ----------------------------------------------------------------------
+
+/.venv/
+/.pytest_cache/
+/.mypy_cache/
+/.ruff_cache/
+/.coverage
+/htmlcov/
+
+__pycache__/
+*.py[cod]
+
+# ----------------------------------------------------------------------
+# TreeForge diagnostics / temporary state
+# ----------------------------------------------------------------------
+
+/.smoke/
+/.smoke-tmp/
+/logs/
+
+# ----------------------------------------------------------------------
+# TreeForge local inputs / generated workspaces
+# ----------------------------------------------------------------------
+
+/images/
+/workspace/
+
+/output/
+/output2/
+/outputbak/
+/output-provider-validation/
+
+/.artifacts/
+/.out/
+
+# ----------------------------------------------------------------------
+# External Android source/build checkouts
+# ----------------------------------------------------------------------
+
+/aosp/
+/stockaosp15/
+
+# ----------------------------------------------------------------------
+# Python packaging output
+# ----------------------------------------------------------------------
+
+/build/
+/dist/
+*.egg-info/
+
+# AOSP product output accidentally materialized at source root.
+# Build outputs must live under AOSP out/, never as source directories.
+/aosp/tangorpro/
+
+# Workspace-local TreeForge CLI state.
+/.treeforge/state/
+
+# Generated TreeForge kernel providers and download cache
+/treeforge/data/kernel/providers/
+/treeforge/data/kernel/cache/

@@ -1,0 +1,150 @@
+{
+  "providers": {
+    "android-image-tools": {
+      "archive_sha256": "23c41550fbbc56396ff9d67b17d1f4dc9e25cbeaae02b784c646b4e8363e4c59",
+      "asset": "android-image-tools-android-15.0.0_r36-linux-x86_64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 2,
+      "release": "android-15.0.0_r36-linux-x86_64",
+      "release_tag": "android-image-tools/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "aosp-adb": {
+      "archive_sha256": "ed16a48c7f62f3a9851cb6e4129d2b5fda01934a883e4b4b44d6dff95dc5f124",
+      "asset": "aosp-adb-android-15.0.0_r36-linux-x86_64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 2,
+      "release": "android-15.0.0_r36-linux-x86_64",
+      "release_tag": "aosp-adb/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "aosp-adbd": {
+      "archive_sha256": "197deb9a0603c3cacdf38cac887714da96602b54e80a669492227b1000a8406c",
+      "asset": "aosp-adbd-android-15.0.0_r36-arm64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 1,
+      "release": "android-15.0.0_r36-arm64",
+      "release_tag": "aosp-adbd/android-15.0.0_r36-2",
+      "source_commit": "362c13c53ebe6f5fd97c59ba9fe9db0d144a3594"
+    },
+    "aosp-adbd-recovery": {
+      "archive_sha256": "0bee8152ecd466fd26b86c853e623e95ae80735829da838e5aa235c2715354d6",
+      "asset": "aosp-adbd-recovery-android-15.0.0_r36-arm64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 1,
+      "release": "android-15.0.0_r36-arm64",
+      "release_tag": "aosp-adbd-recovery/android-15.0.0_r36-2",
+      "source_commit": "362c13c53ebe6f5fd97c59ba9fe9db0d144a3594"
+    },
+    "aosp-fastboot": {
+      "archive_sha256": "122acd2acf32968157792e637fb0f0f2d6462362c4e0c53fc927d3690bfbc742",
+      "asset": "aosp-fastboot-android-15.0.0_r36-linux-x86_64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 2,
+      "release": "android-15.0.0_r36-linux-x86_64",
+      "release_tag": "aosp-fastboot/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "aosp-fastbootd": {
+      "archive_sha256": "7ad44e6b98fab9f285687a79374c9995f8209700abf954f048c5453b812a5639",
+      "asset": "aosp-fastbootd-android-15.0.0_r36-arm64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 1,
+      "release": "android-15.0.0_r36-arm64",
+      "release_tag": "aosp-fastbootd/android-15.0.0_r36-2",
+      "source_commit": "362c13c53ebe6f5fd97c59ba9fe9db0d144a3594"
+    },
+    "avbtool": {
+      "archive_sha256": "16702f5668191bf9425bdd14200aea47606eeb055d1d8f6f20afa151675d3717",
+      "asset": "avbtool-android-15.0.0_r36-linux-x86_64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 2,
+      "release": "android-15.0.0_r36-linux-x86_64",
+      "release_tag": "avbtool/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "create_snapshot": {
+      "archive_sha256": "2c43d4753c52c1a48e73894d5a2a7d705b83415c25e05f3dbd119ced4e26a034",
+      "asset": "create_snapshot-android-15.0.0_r36-linux-x86_64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 2,
+      "release": "android-15.0.0_r36-linux-x86_64",
+      "release_tag": "create_snapshot/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "inspect_cow": {
+      "archive_sha256": "e593558a6e1c1edc90fa72b82ddfefc5a82f68bd0a74ff6f642ff512089a13a0",
+      "asset": "inspect_cow-android-15.0.0_r36-linux-x86_64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 2,
+      "release": "android-15.0.0_r36-linux-x86_64",
+      "release_tag": "inspect_cow/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "mkdtimg": {
+      "archive_sha256": "b75cb6fd82d2c80d91b1e553f19aaef7abcd6e2ca61a898ef5b5af36562437f8",
+      "asset": "mkdtimg-android-15.0.0_r36-linux-x86_64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 2,
+      "release": "android-15.0.0_r36-linux-x86_64",
+      "release_tag": "mkdtimg/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "snapuserd_ramdisk": {
+      "archive_sha256": "721a0d371db5d795fac26ae84af959a3c29206273e59368dfebe92f5f205b805",
+      "asset": "snapuserd_ramdisk-android-15.0.0_r36-arm64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 1,
+      "release": "android-15.0.0_r36-arm64",
+      "release_tag": "snapuserd_ramdisk/android-15.0.0_r36-2",
+      "source_commit": "362c13c53ebe6f5fd97c59ba9fe9db0d144a3594"
+    },
+    "treeforge-adb": {
+      "archive_sha256": "e22f46486f8842f10e3b0634f116aa591031e594333e1924510d06fdd34976ce",
+      "asset": "treeforge-adb-android-15.0.0_r36-linux-x86_64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 2,
+      "release": "android-15.0.0_r36-linux-x86_64",
+      "release_tag": "treeforge-adb/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "treeforge-adbd": {
+      "archive_sha256": "d4d8d4fd54884b4b132a37b3ad706bb68e5b7b0124d3626bdddd3e81cf8d8e8f",
+      "asset": "treeforge-adbd-android-15.0.0_r36-arm64.tar.xz",
+      "consumer_manifest": false,
+      "release": "android-15.0.0_r36-arm64",
+      "release_tag": "treeforge-adbd/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "treeforge-fastboot": {
+      "archive_sha256": "bcc26d3f9e6181960bb19b103bbbd0d2f1cb7cf1b821279a101f380168e09afc",
+      "asset": "treeforge-fastboot-android-15.0.0_r36-linux-x86_64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 2,
+      "release": "android-15.0.0_r36-linux-x86_64",
+      "release_tag": "treeforge-fastboot/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "treeforge-fastbootd": {
+      "archive_sha256": "c9b008e13f9c9aabbe6b89637dd8feedd9347376264c1ba54cc68847dbae8218",
+      "asset": "treeforge-fastbootd-android-15.0.0_r36-arm64.tar.xz",
+      "consumer_manifest": false,
+      "release": "android-15.0.0_r36-arm64",
+      "release_tag": "treeforge-fastbootd/android-15.0.0_r36-1",
+      "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365"
+    },
+    "treeforge-vabc-coordinator": {
+      "archive_sha256": "1150545cd5c22308d2658c5d55cf437176a3989699a114a7e974a3ade8876bb0",
+      "asset": "treeforge-vabc-coordinator-android-15.0.0_r36-arm64.tar.xz",
+      "consumer_manifest": true,
+      "consumer_manifest_schema": 1,
+      "release": "android-15.0.0_r36-arm64",
+      "release_tag": "treeforge-vabc-coordinator/android-15.0.0_r36-2",
+      "source_commit": "362c13c53ebe6f5fd97c59ba9fe9db0d144a3594"
+    }
+  },
+  "public_repository": "TreeForgeAOSP/treeforge_toolchain",
+  "schema": 1,
+  "source_commit": "53056b875f3c9d365ca90e2ff8a6c262ed9c0365",
+  "source_repository": "TreeForgeDEV/treeforge_toolchain"
+}
