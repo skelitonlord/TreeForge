@@ -23,6 +23,7 @@ INSTALL_DIR="${DEFAULT_INSTALL_DIR}"
 PYTHON_BIN="${DEFAULT_PYTHON}"
 
 INSTALL_MODE="user"
+DETECTED_DISTRO=""
 SKIP_SYSTEM=false
 SKIP_UPDATE=false
 RUN_TESTS=false
@@ -112,6 +113,84 @@ MAINTAINER_APT_PACKAGES=(
 )
 
 DEVELOPER_APT_PACKAGES=(
+)
+
+# -------------------------------------------------------------------------
+# Alpine apk package equivalents
+#
+# Each array mirrors its apt counterpart above. Package names differ
+# between Debian/Ubuntu and Alpine; the mapping is documented inline.
+#
+# Packages with no Alpine equivalent:
+#   libc6-dev-i386  -- glibc 32-bit multilib; Alpine uses musl.
+#   lib32z1-dev     -- 32-bit zlib for glibc multilib.
+# These are omitted. Full AOSP source builds requiring 32-bit host
+# support need a glibc-based container.
+# -------------------------------------------------------------------------
+
+COMMON_APK_PACKAGES=(
+    bash
+    sudo
+    coreutils
+    util-linux
+    grep
+    sed
+    gawk
+    xdg-utils
+    # hostname is provided by busybox on Alpine.
+
+    git
+    openssh-client
+    ca-certificates
+    curl
+    github-cli          # Debian: gh
+    # repo is not packaged; installed manually below.
+
+    openssl
+
+    python3
+    py3-pip             # Debian: python3-pip
+    # python3-venv is included in Alpine's python3 package.
+)
+
+USER_APK_PACKAGES=(
+    clang
+    lld
+    gcompat             # glibc compatibility for pre-built Android host binaries.
+)
+
+MAINTAINER_APK_PACKAGES=(
+    python3-dev
+    build-base          # Debian: build-essential
+    git-lfs
+    pkgconf             # Debian: pkg-config
+
+    unzip
+    zip
+    7zip                # Debian: p7zip-full
+    xz                  # Debian: xz-utils
+    cpio
+    lz4
+    zstd
+    file
+
+    e2fsprogs
+    erofs-utils
+
+    # git-core is redundant; git is already in COMMON.
+    gnupg
+    flex
+    bison
+    zlib-dev            # Debian: zlib1g-dev
+    xorgproto           # Debian: x11proto-core-dev
+    libx11-dev
+    mesa-dev            # Debian: libgl1-mesa-dev
+    libxml2-utils
+    libxslt             # Debian: xsltproc (provides xsltproc binary)
+    fontconfig
+)
+
+DEVELOPER_APK_PACKAGES=(
 )
 
 DEVELOPER_PYTHON_PACKAGES=(
@@ -277,6 +356,34 @@ resolve_apt_packages() {
 }
 
 
+resolve_apk_packages() {
+    APK_PACKAGES=(
+        "${COMMON_APK_PACKAGES[@]}"
+        "${USER_APK_PACKAGES[@]}"
+    )
+
+    case "${INSTALL_MODE}" in
+        user)
+            ;;
+        maintainer)
+            APK_PACKAGES+=(
+                "${MAINTAINER_APK_PACKAGES[@]}"
+            )
+            ;;
+        developer)
+            APK_PACKAGES+=(
+                "${MAINTAINER_APK_PACKAGES[@]}"
+                "${DEVELOPER_APK_PACKAGES[@]}"
+            )
+            ;;
+        *)
+            fail \
+                "Cannot resolve packages for unknown mode: ${INSTALL_MODE}"
+            ;;
+    esac
+}
+
+
 mode_supports_bringup() {
     [[ "${INSTALL_MODE}" == "maintainer" \
         || "${INSTALL_MODE}" == "developer" ]]
@@ -323,28 +430,119 @@ detect_platform() {
     source /etc/os-release
 
     case "${ID:-}" in
+        alpine)
+            DETECTED_DISTRO="alpine"
+            ;;
         ubuntu|debian)
+            DETECTED_DISTRO="debian"
             ;;
         *)
-            [[ "${ID_LIKE:-}" == *debian* ]] \
-                || fail "Only Ubuntu/Debian-compatible systems are supported. Detected: ${PRETTY_NAME:-unknown}"
+            if [[ "${ID_LIKE:-}" == *debian* ]]; then
+                DETECTED_DISTRO="debian"
+            else
+                fail \
+                    "Unsupported distribution. Expected: Alpine, Ubuntu, or Debian-compatible. Detected: ${PRETTY_NAME:-unknown}"
+            fi
             ;;
     esac
 
-    success "Detected ${PRETTY_NAME:-Debian-compatible Linux}"
+    success "Detected ${PRETTY_NAME:-Linux} (${DETECTED_DISTRO} family)"
 }
 
-require_sudo() {
+# Resolved at runtime in require_priv_esc(); exported so subshells inherit it.
+_PRIV=""
+
+require_priv_esc() {
     if [[ "${EUID}" -eq 0 ]]; then
         warn "Running the complete setup as root is not recommended."
+        _PRIV=""
         return
     fi
 
-    command_exists sudo \
-        || fail "sudo is required to install system packages."
+    if command_exists doas; then
+        _PRIV="doas"
+    elif command_exists sudo; then
+        _PRIV="sudo"
+    else
+        fail "Neither doas nor sudo found; one is required to install system packages."
+    fi
 
-    sudo -v
+    # Validate credentials early so later steps do not prompt mid-run.
+    ${_PRIV} true
 }
+
+install_system_packages_apt() {
+    export DEBIAN_FRONTEND=noninteractive
+
+    info \
+        "Updating apt package metadata"
+
+    run \
+        ${_PRIV} apt-get update
+
+    resolve_apt_packages
+
+    info \
+        "Installing ${INSTALL_MODE} mode system dependencies"
+
+    run \
+        ${_PRIV} apt-get install -y \
+        "${APT_PACKAGES[@]}"
+}
+
+
+enable_alpine_community_repo() {
+    if grep -q '^[^#].*community' /etc/apk/repositories 2>/dev/null; then
+        return
+    fi
+
+    local mirror
+    mirror="$(grep -m1 '^http' /etc/apk/repositories | sed 's|/main.*|/community|')"
+    if [[ -n "${mirror}" ]]; then
+        info "Enabling Alpine community repository"
+        printf '%s\n' "${mirror}" | ${_PRIV} tee -a /etc/apk/repositories >/dev/null
+    fi
+}
+
+
+install_repo_tool() {
+    local repo_bin="/usr/local/bin/repo"
+
+    if [[ -x "${repo_bin}" ]]; then
+        success "Android repo tool already installed"
+        return
+    fi
+
+    info "Installing Android repo tool"
+    ${_PRIV} curl -fsSL -o "${repo_bin}" \
+        https://storage.googleapis.com/git-repo-downloads/repo
+    ${_PRIV} chmod 755 "${repo_bin}"
+    success "Android repo tool installed"
+}
+
+
+install_system_packages_apk() {
+    enable_alpine_community_repo
+
+    info \
+        "Updating apk package index"
+
+    run \
+        ${_PRIV} apk update
+
+    resolve_apk_packages
+
+    info \
+        "Installing ${INSTALL_MODE} mode system dependencies"
+
+    run \
+        ${_PRIV} apk add --no-cache \
+        "${APK_PACKAGES[@]}"
+
+    # The Google repo tool is not packaged in Alpine repositories.
+    install_repo_tool
+}
+
 
 install_system_packages() {
     if "${SKIP_SYSTEM}"; then
@@ -355,24 +553,19 @@ install_system_packages() {
     fi
 
     detect_platform
-    require_sudo
+    require_priv_esc
 
-    export DEBIAN_FRONTEND=noninteractive
-
-    info \
-        "Updating apt package metadata"
-
-    run \
-        sudo apt-get update
-
-    resolve_apt_packages
-
-    info \
-        "Installing ${INSTALL_MODE} mode system dependencies"
-
-    run \
-        sudo apt-get install -y \
-        "${APT_PACKAGES[@]}"
+    case "${DETECTED_DISTRO}" in
+        alpine)
+            install_system_packages_apk
+            ;;
+        debian)
+            install_system_packages_apt
+            ;;
+        *)
+            fail "No package installation path for distro: ${DETECTED_DISTRO}"
+            ;;
+    esac
 }
 
 
